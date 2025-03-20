@@ -6,8 +6,6 @@ public class Main {
     static private boolean turn = true;
     static private final char[] arr = {'1','2','3','4','5','6','7','8','9'};
     static private final Scanner scanner = new Scanner(System.in);
-    static private int[] chosen = new int[9];
-    static private int index = 0;
 
     public static void main(String[] args) {
         while(game){
@@ -35,27 +33,23 @@ public class Main {
     public static void choose(boolean who) {
         boolean trying = true;
         int choice = 0;
-        while (trying) {
-            try {
-                choice = scanner.nextInt();
-                scanner.nextLine();
-                for (int i : chosen) {
-                    if (i == choice && i != 0) {
-                        System.out.println("Wrong Input: This spot is not empty");
-                    }
-                    else if (choice < 1 || choice > 9) {
-                        System.out.println("Wrong Input: Please choose between spots 1-9");
-                        throw new ArrayIndexOutOfBoundsException("Wrong Input: Please choose between spots 1-9");
-                    }
-                }
-                trying = false;
-            } catch (ArrayIndexOutOfBoundsException e) {
+        while(trying){
+            choice = scanner.nextInt();
+            if(choice > 9 || choice < 1){
+                System.out.println("Error: Choose between 1-9");
             }
+            else if(arr[choice - 1] == 'O' || arr[choice - 1] == 'X') {
+                System.out.println("Error: Choose a free tile!");
+            }
+            else trying = false;
         }
-        if (who) {
+
+        if(who){
             arr[choice - 1] = 'O';
-        } else arr[choice - 1] = 'X';
-        chosen[index++] = choice;
+        }
+        else{
+            arr[choice - 1] = 'X';
+        }
     }
 
     public static void printBoard(){
