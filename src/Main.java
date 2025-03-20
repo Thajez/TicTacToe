@@ -22,10 +22,7 @@ public class Main {
             }
             scanner.nextLine();
             sum++;
-            if(sum == 9){
-                game = false;
-                printBoard();
-            }
+            checkWinner();
         }
         scanner.close();
     }
@@ -63,7 +60,34 @@ public class Main {
             else if(i == 5){
                 System.out.println(arr[6] + "|" + arr[7] + "|" + arr[8]);
             }
-            else System.out.println("_____");
+
+        }
+    }
+
+    //O = 79
+    //X = 88
+    //0 1 2
+    //3 4 5
+    //6 7 8
+    public static void checkWinner(){
+        if(arr[0]+arr[1]+arr[2] == 237 || arr[3]+arr[4]+arr[5] == 237 || arr[6]+arr[7]+arr[8] == 237
+        || arr[0]+arr[3]+arr[6] == 237 || arr[1]+arr[4]+arr[7] == 237 || arr[2]+arr[5]+arr[8] == 237
+        || arr[0]+arr[4]+arr[8] == 237 || arr[6]+arr[4]+arr[2] == 237) {
+            printBoard();
+            System.out.println("O wins!");
+            game = false;
+        }
+        else if(arr[0]+arr[1]+arr[2] == 264 || arr[3]+arr[4]+arr[5] == 264 || arr[6]+arr[7]+arr[8] == 264
+                || arr[0]+arr[3]+arr[6] == 264 || arr[1]+arr[4]+arr[7] == 264 || arr[2]+arr[5]+arr[8] == 264
+                || arr[0]+arr[4]+arr[8] == 264 || arr[6]+arr[4]+arr[2] == 264) {
+            printBoard();
+            System.out.println("X wins!");
+            game = false;
+        }
+        else if (sum == 9) {
+            printBoard();
+            System.out.println("Tie!");
+            game = false;
         }
     }
 }
